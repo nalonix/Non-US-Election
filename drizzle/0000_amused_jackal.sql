@@ -1,3 +1,9 @@
+DO $$ BEGIN
+ CREATE TYPE "public"."elect" AS ENUM('Kamala Harris', 'Donald Trump');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "account" (
 	"id" text PRIMARY KEY NOT NULL,
 	"accountId" text NOT NULL,
@@ -26,6 +32,9 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"image" text,
 	"createdAt" timestamp NOT NULL,
 	"updatedAt" timestamp NOT NULL,
+	"country" text,
+	"yearOfBirth" integer,
+	"elect" "elect",
 	CONSTRAINT "user_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint

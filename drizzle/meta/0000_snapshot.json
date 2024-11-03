@@ -1,5 +1,5 @@
 {
-  "id": "6d82f624-987c-4f6e-bc76-cc97aa940c51",
+  "id": "a30bec7e-2968-491d-9631-ce92135d0f72",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -181,6 +181,25 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "yearOfBirth": {
+          "name": "yearOfBirth",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "elect": {
+          "name": "elect",
+          "type": "elect",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -231,7 +250,16 @@
       "uniqueConstraints": {}
     }
   },
-  "enums": {},
+  "enums": {
+    "public.elect": {
+      "name": "elect",
+      "schema": "public",
+      "values": [
+        "Kamala Harris",
+        "Donald Trump"
+      ]
+    }
+  },
   "schemas": {},
   "_meta": {
     "columns": {},

@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { gitHubSignOut, gitHubSignIn, getSession } from '$lib/client';
-
 	import { page } from '$app/stores';
+	import { handleSignOut } from '$lib/client.js';
 
 	const { data } = $props();
 
@@ -15,11 +14,7 @@
 </div>
 
 {#if data.session}
-	<button onclick={gitHubSignOut} class="bg-rose-600 text-white active:bg-rose-900">Sign Out</button
-	>
-{:else}
-	<button onclick={gitHubSignIn} class="bg-rose-600 text-white active:bg-rose-900"
-		>Github Sign In</button
+	<button onclick={handleSignOut} class="bg-rose-600 text-white active:bg-rose-900">Sign Out</button
 	>
 {/if}
 

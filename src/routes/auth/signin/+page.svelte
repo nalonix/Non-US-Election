@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { gitHubSignOut, gitHubSignIn } from '$lib/client';
+	import { googleSignIn } from '$lib/client';
 </script>
 
 <div>
-	<button onclick={gitHubSignIn} class="bg-rose-600 text-white active:bg-rose-900"
-		>Github Sign In</button
+	<button onclick={googleSignIn} class="bg-rose-600 text-white active:bg-rose-900"
+		>Google Sign In</button
 	>
 </div>

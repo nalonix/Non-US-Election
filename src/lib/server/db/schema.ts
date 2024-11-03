@@ -1,4 +1,6 @@
-import { pgTable, text, integer, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, pgEnum, text, integer, timestamp, boolean } from 'drizzle-orm/pg-core';
+
+export const ElectEnum = pgEnum('elect', ['Kamala Harris', 'Donald Trump']);
 
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
@@ -8,8 +10,9 @@ export const user = pgTable('user', {
 	image: text('image'),
 	createdAt: timestamp('createdAt').notNull(),
 	updatedAt: timestamp('updatedAt').notNull(),
-	country: text('country').notNull(),
-	yearOfBirth: integer('yearOfBirth').notNull()
+	country: text('country'),
+	yearOfBirth: integer('yearOfBirth'),
+	elect: ElectEnum('elect')
 });
 
 export const session = pgTable('session', {
