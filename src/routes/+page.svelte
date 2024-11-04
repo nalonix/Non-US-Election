@@ -12,7 +12,7 @@
 	<p>You can only vote once!</p>
 	<form action="/" use:enhance method="POST" class="flex w-full max-w-80 flex-col gap-2">
 		<label for="kamala" class:selected={selectedOption === 'Kamala Harris'}>
-			<img src="/media/icon/google.png" class="h-7 w-7" alt="kamala harris pic" />
+			<img src="/media/image/kamala.jpg" class="h-9 w-9" alt="kamala harris pic" />
 			<input
 				type="radio"
 				name="vote"
@@ -24,7 +24,7 @@
 		</label>
 
 		<label for="donald" class:selected={selectedOption === 'Donald Trump'}>
-			<img src="/media/icon/google.png" class="h-7 w-7" alt="donald trump pic" />
+			<img src="/media/image/trump.jpg" class="h-9 w-9" alt="donald trump pic" />
 			<input
 				type="radio"
 				name="vote"
@@ -44,7 +44,7 @@
 
 <style lang="postcss">
 	label {
-		@apply flex select-none flex-row items-center gap-3 rounded-sm border-2 px-4 py-3 font-semibold transition-all duration-300 hover:bg-gray-100;
+		@apply flex select-none flex-row items-center gap-3 rounded-sm border-2 px-3 py-2 font-semibold transition-all duration-300 hover:bg-gray-100;
 	}
 
 	input {
