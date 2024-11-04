@@ -36,7 +36,7 @@ export async function load({ locals, request }) {
 
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
-	default: async ({ request, locals }) => {
+	submitDetails: async ({ request, locals }) => {
 		const session = locals.session;
 
 		if (!session) {
@@ -44,7 +44,7 @@ export const actions = {
 		}
 
 		const data = await request.formData();
-		const yearOfBirth = parseInt(data.get('yearOfBirth') as string);
+		const yearOfBirth = parseInt(data.get('yob') as string) || 0;
 		const country = data.get('country') as string;
 
 		await db
