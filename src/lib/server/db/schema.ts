@@ -1,6 +1,6 @@
-import { pgTable, pgEnum, text, integer, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, pgEnum, text, integer, timestamp, boolean, serial } from 'drizzle-orm/pg-core';
 
-export const ElectEnum = pgEnum('elect', ['Kamala Harris', 'Donald Trump']);
+export const CandidateEnum = pgEnum('candidate', ['Kamala Harris', 'Donald Trump']);
 
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
@@ -11,8 +11,13 @@ export const user = pgTable('user', {
 	createdAt: timestamp('createdAt').notNull(),
 	updatedAt: timestamp('updatedAt').notNull(),
 	country: text('country'),
-	yearOfBirth: integer('yearOfBirth'),
-	elect: ElectEnum('elect')
+	yearOfBirth: integer('yearOfBirth')
+});
+
+export const vote = pgTable('vote', {
+	id: serial('id').primaryKey(),
+	userId: text('user_id').references(() => user.id),
+	candidate: CandidateEnum('candidate')
 });
 
 export const session = pgTable('session', {
