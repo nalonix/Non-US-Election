@@ -1,10 +1,11 @@
 import { goto } from '$app/navigation';
 import { redirect } from '@sveltejs/kit';
+import { BETTER_AUTH_URL } from '$env/static/private';
 
 import { createAuthClient } from 'better-auth/svelte';
 
 export const { signIn, signUp, signOut, useSession, getSession } = createAuthClient({
-	baseURL: 'http://localhost:5173' // the base url of your auth server
+	baseURL: BETTER_AUTH_URL // the base url of your auth server
 });
 
 export const googleSignIn = async () => {
