@@ -41,6 +41,7 @@
 	"dependencies": {
 		"@neondatabase/serverless": "^0.9.4",
 		"better-auth": "0.7.0-beta.1",
-		"drizzle-orm": "^0.33.0"
+		"drizzle-orm": "^0.33.0",
+		"svelte-country-select": "^0.0.2"
 	}
 }

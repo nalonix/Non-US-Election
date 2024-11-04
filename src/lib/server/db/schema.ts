@@ -11,13 +11,15 @@ export const user = pgTable('user', {
 	createdAt: timestamp('createdAt').notNull(),
 	updatedAt: timestamp('updatedAt').notNull(),
 	country: text('country'),
-	yearOfBirth: integer('yearOfBirth')
+	yearOfBirth: integer('yearOfBirth'),
+	detailsComplete: boolean('detailsComplete').notNull().default(false)
 });
 
 export const vote = pgTable('vote', {
 	id: serial('id').primaryKey(),
 	userId: text('user_id').references(() => user.id),
-	candidate: CandidateEnum('candidate')
+	candidate: CandidateEnum('candidate'),
+	createdAt: timestamp('createdAt').notNull().defaultNow()
 });
 
 export const session = pgTable('session', {

@@ -4,15 +4,10 @@ import { goto } from '$app/navigation';
 import { db } from '$lib/server/db';
 import { vote } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
-
-enum CandidateEnum {
-	Kamala = 'Kamala Harris',
-	Donald = 'Donald Trump'
-}
+import { user } from '$lib/server/db/schema';
 
 export async function load({ locals, request }) {
 	const session = locals.session;
-	const user = locals.user;
 
 	if (!session) {
 		throw redirect(302, '/auth/signin');
@@ -20,14 +15,22 @@ export async function load({ locals, request }) {
 
 	// Check if the user has already voted
 	const existingVote = await db.select().from(vote).where(eq(vote.userId, session.userId)).limit(1);
-	console.log('Existing Vote: ', existingVote);
-	if (existingVote.length) {
-		throw redirect(302, '/complete');
+	if (!existingVote.length) {
+		throw redirect(302, '/');
 	}
+
+	// Fetch details status
+	const { detailsComplete } = (
+		await db
+			.select({ detailsComplete: user.detailsComplete })
+			.from(user)
+			.where(eq(user.id, session.userId))
+			.limit(1)
+	)[0];
 
 	return {
 		session,
-		user
+		detailsComplete
 	};
 }
 
@@ -41,27 +44,13 @@ export const actions = {
 		}
 
 		const data = await request.formData();
-		const selectedCandidate = data.get('vote') as CandidateEnum;
+		const yearOfBirth = parseInt(data.get('yearOfBirth') as string);
+		const country = data.get('country') as string;
 
-		if (!vote) {
-			throw redirect(302, '/');
-		}
-
-		// Check if the user has already voted
-		const existingVote = await db
-			.select()
-			.from(vote)
-			.where(eq(vote.userId, session.userId))
-			.limit(1);
-
-		if (existingVote.length) {
-			throw redirect(302, '/complete');
-		}
-
-		await db.insert(vote).values({
-			userId: session.userId,
-			candidate: selectedCandidate
-		});
+		await db
+			.update(user)
+			.set({ yearOfBirth, country, detailsComplete: true })
+			.where(eq(user.id, session.userId));
 
 		return { success: true };
 	}
