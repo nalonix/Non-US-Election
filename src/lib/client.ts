@@ -6,7 +6,7 @@ import { createAuthClient } from 'better-auth/svelte';
 const isProd = process.env.NODE_ENV === 'production';
 
 export const { signIn, signUp, signOut, useSession, getSession } = createAuthClient({
-	baseURL: isProd ? 'https://non-us-election.vercel.app' : 'http://localhost:5173'
+	baseURL: isProd ? 'https://non-us-election.vercel.app/api/auth' : 'http://localhost:5173/api/auth'
 });
 
 export const googleSignIn = async () => {
